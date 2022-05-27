@@ -43,7 +43,7 @@ class Encoder(nn.Module):
         self.bottleneck_0 = nn.Linear(feature_len, 256)
         self.bottleneck_0.weight.data.normal_(0, 0.005)
         self.bottleneck_0.bias.data.fill_(0.1)
-        self.bottleneck_layer = nn.Sequential(self.bottleneck_0, nn.ReLU())
+        self.bottleneck_layer = nn.Sequential(self.bottleneck_0, nn.BatchNorm1d(256), nn.ReLU())
         self.classifier_layer = predictor(256, total_classes)
 
     def forward(self, x):
